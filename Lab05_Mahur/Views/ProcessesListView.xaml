@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Lab05_Mahur.views.ProcessesListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab05_Mahur.views"
+        mc:Ignorable="d"
+        Name="Root">
+    <Grid Name="MainGrid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DataGrid  Grid.Row="0" ItemsSource="{Binding Processes, Mode=TwoWay, NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Current, Mode=OneWayToSource}" SelectedIndex="{Binding CurrentIndex, Mode=TwoWay}" FocusManager.FocusedElement="{Binding Current, Mode=OneWay}" FocusManager.IsFocusScope="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="Name" Content="Name" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Process details" Command="{Binding Source={x:Reference Name=Root}, Path=DataContext.ShowDetails}"  CommandParameter="{Binding}"></MenuItem>
+                                        <MenuItem Header="End process" Command="{Binding Source={x:Reference Name=Root}, Path=DataContext.EndProcess}" CommandParameter="{Binding}"></MenuItem>
+                                        <MenuItem Header="File directory explore" Command="{Binding Source={x:Reference Name=Root}, Path=DataContext.ShowFolder}" CommandParameter="{Binding}"></MenuItem>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="Id" Content="Id" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="IsActive" Content="IsActive" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="CPUUsage" Binding="{Binding CPUUsage, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="CPUUsage" Content="CPUUsage" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="MemoryUsage" Binding="{Binding MemoryUsage, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="MemoryUsage" Content="MemoryUsage" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="NThreads" Binding="{Binding NThreads, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="NThreads" Content="NThreads" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="UserName" Binding="{Binding UserName, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="UserName" Content="UserName" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="FilePath" Binding="{Binding FilePath, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="FilePath" Content="FilePath" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="StartTime" Binding="{Binding StartTime, Mode=OneWay}" IsReadOnly="True" >
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Name="StartTime" Content="StartTime" Command="{Binding DataContext.SortBy, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Label Content="Total CPU usage: "></Label>
+                <Label Content="{Binding TotalCPU, Mode=OneWay}"></Label>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Content="Available memory (in MB): "></Label>
+                <Label Content="{Binding AvailableMem, Mode=OneWay}"></Label>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</UserControl>
